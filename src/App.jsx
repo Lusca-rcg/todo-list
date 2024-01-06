@@ -1,7 +1,9 @@
-import { useState } from "react"
-import Lista from "./components/ListaContainer"
-import { GlobalStyle } from "./styles/Global/global"
-import { HeaderContainer } from "./components/Header/style"
+import { useState } from 'react';
+import Header from './components/Header/index';
+import { HeaderConteiner } from './components/Header/styles';
+import GlobalStyle from './styles/global';
+import FormContainer from './components/form/index';
+import TaskItem from './components/TaskItem';
 
 function App() {
   const AddTask = (taskName) => {
@@ -47,18 +49,19 @@ function App() {
   ])
 
   return (
-   <ContainerPai>
+    <div>
     <GlobalStyle/>
-      <HeaderContainer>
-        <h1>Todo List</h1>
-      </HeaderContainer>
-      <Tarefas>
-        {tasks.map((task) => (
-          <Lista task={task}/>
-        ) )}
-      </Tarefas>
-    </ContainerPai>
-  )}
+    <Header/>
+    <FormContainer AddTask={AddTask}/>
+  <div>
+    {tasks.map((task) => (
+    <TaskItem key={task.id} task={task} removeTask={removeTask} editTask={editTask}/>
+    )
+    )}
+  </div>
+  </div>
+  )
+}
 
 
 export default App

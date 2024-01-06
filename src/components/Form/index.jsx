@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
-import { Form } from './styles.jsx/'
-import { Input } from './styles/'
-import { Button } from './styles/'
+import { Form } from './style'
+import { Input } from './style'
+import { Button } from './style'
 
 const FormContainer = ({AddTask}) => {
 
