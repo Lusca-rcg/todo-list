@@ -2,23 +2,6 @@ import { useState } from "react"
 import Lista from "./components/ListaContainer"
 import { GlobalStyle } from "./styles/Global/global"
 import { HeaderContainer } from "./components/Header/style"
-import styled from "styled-components"
-
-// export const Tarefas = styled.div`
-//   text-align: center;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-// `
-// export const ContainerPai = styled.div`
-//   display: flex;
-//   align-content: center;
-//   flex-direction: column;
-//   justify-content: center;
-//   border: solid 1px;
-
-// `
 
 function App() {
   const AddTask = (descricao) => {
@@ -29,9 +12,15 @@ function App() {
         "status": pendente
       }
     ]
-    setTask(newTask);
+    setTask(newTask)
   }
-
+  
+  const editTask = (id, newDescricao) => {
+    const newTask = todos.map((task) => 
+    task.id === id ? {...task, descricao: newDescricao} : task
+    ) ;
+    setTask(newTask) 
+  }
 
 
 
