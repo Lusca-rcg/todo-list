@@ -1,17 +1,8 @@
-import React from "react"
-import verificado from '../../assets/certo.png'
-import lapis from '../../assets/lapis.png'
-import lixeira from '../../assets/lixeira.png'
-import { ContainerPai, ContainerLista, ContainerListaItem, Img, Texto, ContainerListafuncoes } from "./style"
-
-
-// import React from 'react'
-// import verificado from '../../assets/certo.png'
-// import lapis from '../../assets/lapis.png'
-// import lixeira from '../../assets/lixeira.png'
-// import { ContainerListaItem, ContainerPai, Img, ContainerListafuncoes, Texto  } from './styles'
-// import { ContainerLista } from './styles'
-
+import React from 'react';
+import verificado from '../../assets/certo1.png';
+import lapis from '../../assets/lapis.png';
+import lixeira from '../../assets/lixeira.png';
+import {ContainerPai, ContainerLista, ContainerListaItem, Img, Texto, ContainerListaFuncoes } from "./style.jsx";
 
 
 const TaskItem = ({task,removeTask, editTask}) => {
@@ -24,10 +15,10 @@ const TaskItem = ({task,removeTask, editTask}) => {
         </ContainerListaItem>
       </ContainerLista>
       <ContainerLista>
-        <ContainerListafuncoes>
+        <ContainerListaFuncoes>
           <Img onClick={() => editTask(task.id)} src={lapis} alt="" />
           <Img onClick={() => removeTask(task.id)} src={lixeira} alt="" />
-        </ContainerListafuncoes>
+        </ContainerListaFuncoes>
       </ContainerLista>
 
     </ContainerPai>

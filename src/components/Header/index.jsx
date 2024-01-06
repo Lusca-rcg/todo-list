@@ -1,10 +1,10 @@
-import { HeaderConteiner } from "./styles"
+import { HeaderContainer } from "./style.jsx"
 
 function Header() {
     return (
-    <HeaderConteiner>
+    <HeaderContainer>
         <h1>Todo List</h1>
-    </HeaderConteiner>
+    </HeaderContainer>
     )
 }
 export default Header

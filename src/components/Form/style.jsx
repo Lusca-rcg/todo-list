@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const Form = styled.div`
     display: flex;
@@ -17,8 +17,8 @@ export const Input = styled.input`
 export const Button = styled.button`
     margin: 0 45% 3% 45%;
     padding: 1.5%;
-    background-color: #6d06a4;
-    color: white;
+    background-color: #176B87;
+    color: #ffffff;
     border-radius: 10%;
 
 `

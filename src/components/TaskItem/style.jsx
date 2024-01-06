@@ -1,8 +1,9 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 
 export const Img = styled.img`
   width: 20px;
+  height: 25px;
 `
 export const ContainerPai = styled.div`
   display: flex;
@@ -13,17 +14,17 @@ export const ContainerLista = styled.ul`
   display: flex;
   list-style: none;
   justify-content: space-between;
-  align-items:center;
   
 `
 export const ContainerListaItem = styled.li`
   display: flex;
+  align-items: center;
   gap:40px;
 `
-export const ContainerListafuncoes = styled.li`
+export const ContainerListaFuncoes = styled.li`
   display:flex;
   padding: 5px 20px;
-
+  align-items: center;
   gap: 40px;
 `
 export const Texto = styled.h6`
