@@ -1,32 +1,36 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form } from './style.jsx';
 import { Input } from './style.jsx';
 import { Button } from './style.jsx';
 
-const FormContainer = ({AddTask}) => {
+const FormContainer = ({tasks, setTasks}) => {
 
-  const [taskName,setTask] = useState('') 
+  const [taskTitle,setTaskTitle] = useState('') 
 
-  const handlySubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    if(!taskName) return
-      
-      AddTodo(taskName)
-      setTask('')
-    
+    if(!taskTitle) return
+      AddTask(taskTitle)
   }
-  const handlyClick = () => {
-    AddTodo(taskName)
-  }
-  return (
 
-    <Form onSubmit = {handlySubmit}>
-      <Input value={taskName} 
+   useEffect(() => {
+    console.log(taskTitle)
+   }, [taskTitle]) 
+
+  const handleClick = () => {
+    setTasks([...tasks, {id: Math.random() ,taskName: taskTitle}]);
+    setTaskTitle('');
+    console.log(tasks);
+  }
+
+  return (
+    <Form onSubmit = {handleSubmit}>
+      <Input value={taskTitle} 
       type="text"
-      placeholder ='Enter title'
-      onChange = {(e) => setTask(e.target.value)}  />
-      <Button onClick ={handlyClick}>ADD</Button>
+      placeholder ='Tarefas...'
+      onChange = {(e) => setTaskTitle(e.target.value)}  />
+      <Button onClick ={handleClick}>ADD</Button>
     </Form>
   )
 }
