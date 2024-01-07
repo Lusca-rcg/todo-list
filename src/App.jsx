@@ -10,34 +10,42 @@ function App() {
     {
       id: 1,
       taskName: 'estudar react',
-      status: 'concluido',
+      status: false,
     },
     {
       id: 2,
       taskName: 'malhar',
-      status: 'em andamento',
+      status: false,
     },
     {
       id: 3,
       taskName: 'dormir',
-      status: 'pendente',
+      status: true,
     },
   ]);
+  
+const editTask = (id) => {
+  const newTasks = [...tasks];
+  const editedTask = prompt('Edite sua task');
 
-  const editTask = (id) => {
-    const newTask = tasks.map((task) =>
-      task.id === id ? { ...task, taskName: newTaskName } : task
-    );
-    setTasks(newTask);
+  const editedTaskIndex = newTasks.findIndex((task) => task.id === id);
 
-    alert( id);
-  };
+  if (editedTaskIndex !== -1) {
+      newTasks[editedTaskIndex] = {
+          ...newTasks[editedTaskIndex],
+          taskName: editedTask,
+      };
+
+      setTasks(newTasks);
+      console.log(newTasks);
+  }
+};
+
 
   const removeTask = (id) => {
     const newTask = [...tasks];
     const filteredTasks = newTask.filter((task) => task.id !== id);
     setTasks(filteredTasks);
-    alert(id)
   };
 
 
