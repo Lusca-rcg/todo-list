@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Header from './components/Header/index.jsx';
 import { GlobalStyle } from './styles/Global/global.jsx';
 import FormContainer from './components/Form/index.jsx';
@@ -9,35 +9,48 @@ import api from './service/api.js';
 function App() {
   const [tasks, setTasks] = useState([]);
 
+  const fetchTasks = useCallback(async () => {
+    const response = await api.get('task');
+    console.log(response.data);
+    setTasks(response.data);
+     
+  }, []);
+
   useEffect(() => {
-    async function getData(){
-      const res = await api.get('task')
-      console.log(res.data)
-      setTasks(res.data)
-    }
-    getData()
-  },[tasks])
-  
-  const editTask = (id) => {
+    fetchTasks();
+  }, [fetchTasks]);
+
+const editTask = async (id) => {
   const editedTask = prompt('Edite sua task');
-  const filteredTask = tasks.findIndex((task) => task.id === id )
-    api.put(`${id}`, {
-      ...tasks[filteredTask],
-      nome: editedTask,
-      status: false
-    })
+  const filteredTaskIndex = tasks.findIndex((task) => task.id === id);
+   await api.put(`/${id}`, {
+    ...tasks[filteredTaskIndex],
+    nome: editedTask,
+    status: false,
+  });
+
+  setTasks((prevTasks) => {
+    const updatedTasks = [...prevTasks];
+    updatedTasks[filteredTaskIndex].nome = editedTask;
+    return updatedTasks;
+  });
+  console.log(tasks);
+
 };
 
-  const removeTask = (id) => {
-   api.delete(`/${id}`)
+  const removeTask = async (id) => {
+    await api.delete(`/${id}`);
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+    console.log(tasks); 
+    
   };
 
-
+  
   return (
     <div>
       <GlobalStyle />
       <Header />
-      <FormContainer tasks={tasks} setTasks={setTasks} />
+      <FormContainer tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks} />
       <div>
         {tasks.map((task) => (
           <TaskItem key={task.id} task={task} removeTask={removeTask} editTask={editTask} />
