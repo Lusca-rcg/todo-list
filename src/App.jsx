@@ -1,11 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header/index.jsx';
 import { GlobalStyle } from './styles/Global/global.jsx';
 import FormContainer from './components/Form/index.jsx';
 import TaskItem from './components/TaskItem/index.jsx';
+import api from './service/api.js';
+import { v4 as uuid } from 'uuid';
 
 
 function App() {
+  
+  useEffect(() => {
+    api.post('task', {
+      id: uuid(),
+      nome: 'Pedro',
+      status: false,
+      descricao: 'dormindo'
+    })
+    //api.get('task')
+  }, []); 
+
+  
   const [tasks, setTasks] = useState([
     {
       id: 1,
