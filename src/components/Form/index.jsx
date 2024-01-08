@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { Form } from './style.jsx';
 import { Input } from './style.jsx';
 import { Button } from './style.jsx';
+import api from '../../service/api.js';
+import { v4 as uuid } from 'uuid';
 
 const FormContainer = ({tasks, setTasks}) => {
 
@@ -19,7 +21,11 @@ const FormContainer = ({tasks, setTasks}) => {
    }, [taskTitle]) 
 
   const handleClick = () => {
-    setTasks([...tasks, {id: Math.random() ,taskName: taskTitle}]);
+    api.post('task',{
+      id: uuid(),
+      nome: taskTitle,
+      status: false
+    })
     setTaskTitle('');
     console.log(tasks);
   }

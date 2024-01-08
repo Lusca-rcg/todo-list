@@ -16,7 +16,7 @@ const TaskItem = ({task,removeTask, editTask}) => {
           ? <Img src={verificado} alt="" /> 
           : <Img src={pending} /> 
         }
-          <TaskElement>{task.taskName}</TaskElement> 
+          <TaskElement>{task.nome}</TaskElement> 
         </ContainerListItem>
       </ContainerList>
       <ContainerList>
