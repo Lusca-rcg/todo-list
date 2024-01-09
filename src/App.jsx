@@ -20,40 +20,48 @@ function App() {
     fetchTasks();
   }, [fetchTasks]);
 
-const editTask = async (id) => {
-  const editedTask = prompt('Edite sua task');
-  const filteredTaskIndex = tasks.findIndex((task) => task.id === id);
-   await api.put(`/${id}`, {
-    ...tasks[filteredTaskIndex],
-    nome: editedTask,
-    status: false,
-  });
+  const editTask = async (id) => {
+    const editedTask = prompt('Edite sua task');
+    const filteredTaskIndex = tasks.findIndex((task) => task.id === id);
+    await api.put(`/${id}`, {
+      ...tasks[filteredTaskIndex],
+      nome: editedTask,
+      status: false,
+    });
 
-  setTasks((prevTasks) => {
-    const updatedTasks = [...prevTasks];
-    updatedTasks[filteredTaskIndex].nome = editedTask;
-    return updatedTasks;
-  });
-  console.log(tasks);
+    setTasks((prevTasks) => {
+      const updatedTasks = [...prevTasks];
+      updatedTasks[filteredTaskIndex].nome = editedTask;
+      return updatedTasks;
+    });
+    console.log(tasks);
 
-};
+  };
 
   const removeTask = async (id) => {
     await api.delete(`/${id}`);
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
     console.log(tasks); 
-    
+      
   };
 
-  
+  const changeStatus = async (id) =>{
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((task) =>
+        task.id === id ? { ...task, status: !task.status } : task
+      );
+      return updatedTasks;
+    });
+  }
+
   return (
     <div>
       <GlobalStyle />
-      <Header />
+        <Header />
       <FormContainer tasks={tasks} setTasks={setTasks} fetchTasks={fetchTasks} />
       <div>
         {tasks.map((task) => (
-          <TaskItem key={task.id} task={task} removeTask={removeTask} editTask={editTask} />
+          <TaskItem key={task.id} task={task} removeTask={removeTask} editTask={editTask} changeStatus={changeStatus}/>
         ))}
       </div>
     </div>
